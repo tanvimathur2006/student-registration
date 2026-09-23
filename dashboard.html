@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Student Dashboard</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="dashboard">
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+
+            <h2>Student Portal</h2>
+
+            <nav>
+                <a href="dashboard.html" class="active">Dashboard</a>
+                <a href="#">My Profile</a>
+                <a href="#">Registration</a>
+                <a href="#">Settings</a>
+            </nav>
+
+            <button id="logoutBtn">Logout</button>
+
+        </aside>
+
+
+        <!-- Main Content -->
+        <main class="main-content">
+
+            <header class="dashboard-header">
+                <div>
+                    <h1>Dashboard</h1>
+                    <p>Welcome back, Student!</p>
+                </div>
+            </header>
+
+
+            <!-- Summary Cards -->
+            <section class="cards">
+
+                <div class="card">
+                    <h3>Student Name</h3>
+                    <p id="studentName">-</p>
+                </div>
+
+                <div class="card">
+                    <h3>Course</h3>
+                    <p id="studentCourse">-</p>
+                </div>
+
+                <div class="card">
+                    <h3>Semester</h3>
+                    <p id="studentSemester">-</p>
+                </div>
+
+                <div class="card">
+                    <h3>Status</h3>
+                    <p class="status">Registered</p>
+                </div>
+
+            </section>
+
+
+            <!-- Profile -->
+            <section class="profile-section">
+
+                <h2>Student Information</h2>
+
+                <div class="profile-details">
+
+                    <div>
+                        <strong>Full Name</strong>
+                        <p id="profileName">-</p>
+                    </div>
+
+                    <div>
+                        <strong>Email</strong>
+                        <p id="profileEmail">-</p>
+                    </div>
+
+                    <div>
+                        <strong>Phone</strong>
+                        <p id="profilePhone">-</p>
+                    </div>
+
+                    <div>
+                        <strong>College</strong>
+                        <p id="profileCollege">-</p>
+                    </div>
+
+                    <div>
+                        <strong>Course</strong>
+                        <p id="profileCourse">-</p>
+                    </div>
+
+                    <div>
+                        <strong>Semester</strong>
+                        <p id="profileSemester">-</p>
+                    </div>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
