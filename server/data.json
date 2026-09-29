@@ -1,0 +1,34 @@
+{
+  "students": [
+    {
+      "id": 1,
+      "name": "Test Student",
+      "email": "test999@gmail.com",
+      "phone": "9876543210",
+      "college": "SKIT",
+      "course": "CSE",
+      "semester": "5",
+      "password": "test12345"
+    },
+    {
+      "id": 2,
+      "name": "Tanvi Mathur",
+      "email": "tanvimathur.2006@gmail.com",
+      "phone": "0000000000",
+      "college": "skit",
+      "course": "B.Tech CSE",
+      "semester": "5",
+      "password": "12345678"
+    },
+    {
+      "id": 3,
+      "name": "admin",
+      "email": "admin@gmail.com",
+      "phone": "0987654321",
+      "college": "jecrc",
+      "course": "B.Tech CSE",
+      "semester": "5",
+      "password": "admin123"
+    }
+  ]
+}

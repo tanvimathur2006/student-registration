@@ -1,4 +1,11 @@
 // ================================
+// BACKEND API
+// ================================
+
+const API_URL = "http://localhost:5000";
+
+
+// ================================
 // REGISTRATION
 // ================================
 
@@ -6,7 +13,7 @@ const registrationForm = document.getElementById("registrationForm");
 
 if (registrationForm) {
 
-    registrationForm.addEventListener("submit", function (event) {
+    registrationForm.addEventListener("submit", async function (event) {
 
         event.preventDefault();
 
@@ -41,9 +48,9 @@ if (registrationForm) {
         }
 
 
-        // Create student object
+        // Student data
         const student = {
-            fullName: fullName,
+            name: fullName,
             email: email,
             phone: phone,
             college: college,
@@ -53,13 +60,38 @@ if (registrationForm) {
         };
 
 
-        // Save student data
-        localStorage.setItem("student", JSON.stringify(student));
+        try {
 
-        alert("Registration successful!");
+            const response = await fetch(`${API_URL}/api/register`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(student)
+            });
 
-        // Go to login page
-        window.location.href = "index.html";
+            const result = await response.json();
+
+
+            if (!response.ok) {
+                alert(result.message);
+                return;
+            }
+
+
+            alert("Registration successful!");
+
+            // Go to login page
+            window.location.href = "client/index.html";
+
+        } catch (error) {
+
+            console.error("Registration error:", error);
+
+            alert("Unable to connect to the server.");
+
+        }
+
     });
 }
 
@@ -73,7 +105,7 @@ const loginForm = document.getElementById("loginForm");
 
 if (loginForm) {
 
-    loginForm.addEventListener("submit", function (event) {
+    loginForm.addEventListener("submit", async function (event) {
 
         event.preventDefault();
 
@@ -81,33 +113,46 @@ if (loginForm) {
         const password = document.getElementById("password").value;
 
 
-        // Get registered student
-        const storedStudent = localStorage.getItem("student");
+        try {
 
-        if (!storedStudent) {
-            alert("No registered account found. Please register first.");
-            return;
-        }
+            const response = await fetch(`${API_URL}/api/login`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    email: email,
+                    password: password
+                })
+            });
+
+            const result = await response.json();
 
 
-        const student = JSON.parse(storedStudent);
+            if (!response.ok) {
+                alert(result.message);
+                return;
+            }
 
 
-        // Check credentials
-        if (
-            email === student.email &&
-            password === student.password
-        ) {
+            // Store only the logged-in student's data
+            sessionStorage.setItem(
+                "student",
+                JSON.stringify(result.student)
+            );
 
-            // Create login session
-            localStorage.setItem("loggedIn", "true");
+            sessionStorage.setItem("loggedIn", "true");
+
 
             // Redirect to dashboard
-            window.location.href = "dashboard.html";
+            window.location.href = "client/dashboard.html";
 
-        } else {
 
-            alert("Invalid email or password.");
+        } catch (error) {
+
+            console.error("Login error:", error);
+
+            alert("Unable to connect to the server.");
 
         }
 
@@ -124,19 +169,18 @@ const dashboard = document.querySelector(".dashboard");
 
 if (dashboard) {
 
+    const loggedIn = sessionStorage.getItem("loggedIn");
+
+
     // Check login status
-
-    const loggedIn = localStorage.getItem("loggedIn");
-
     if (loggedIn !== "true") {
 
-        window.location.href = "index.html";
+        window.location.href = "client/index.html";
 
     } else {
 
-        // Get student data
+        const storedStudent = sessionStorage.getItem("student");
 
-        const storedStudent = localStorage.getItem("student");
 
         if (storedStudent) {
 
@@ -146,7 +190,7 @@ if (dashboard) {
             // Dashboard cards
 
             document.getElementById("studentName").textContent =
-                student.fullName;
+                student.name;
 
             document.getElementById("studentCourse").textContent =
                 student.course;
@@ -158,7 +202,7 @@ if (dashboard) {
             // Profile section
 
             document.getElementById("profileName").textContent =
-                student.fullName;
+                student.name;
 
             document.getElementById("profileEmail").textContent =
                 student.email;
@@ -174,6 +218,7 @@ if (dashboard) {
 
             document.getElementById("profileSemester").textContent =
                 student.semester;
+
         }
     }
 }
@@ -190,9 +235,10 @@ if (logoutBtn) {
 
     logoutBtn.addEventListener("click", function () {
 
-        localStorage.removeItem("loggedIn");
+        sessionStorage.removeItem("loggedIn");
+        sessionStorage.removeItem("student");
 
-        window.location.href = "index.html";
+        window.location.href = "client/index.html";
 
     });
 }
