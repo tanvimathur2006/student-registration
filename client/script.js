@@ -2,7 +2,7 @@
 // BACKEND API
 // ================================
 
-const API_URL = "http://localhost:5000";
+const API_URL = "https://student-registration-server-j47v.onrender.com";
 
 
 // ================================
