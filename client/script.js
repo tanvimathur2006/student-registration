@@ -82,7 +82,7 @@ if (registrationForm) {
             alert("Registration successful!");
 
             // Go to login page
-            window.location.href = "client/index.html";
+            window.location.href = "index.html";
 
         } catch (error) {
 
@@ -145,7 +145,7 @@ if (loginForm) {
 
 
             // Redirect to dashboard
-            window.location.href = "client/dashboard.html";
+            window.location.href = "dashboard.html";
 
 
         } catch (error) {
@@ -175,7 +175,7 @@ if (dashboard) {
     // Check login status
     if (loggedIn !== "true") {
 
-        window.location.href = "client/index.html";
+        window.location.href = "index.html";
 
     } else {
 
@@ -238,7 +238,7 @@ if (logoutBtn) {
         sessionStorage.removeItem("loggedIn");
         sessionStorage.removeItem("student");
 
-        window.location.href = "client/index.html";
+        window.location.href = "index.html";
 
     });
 }
